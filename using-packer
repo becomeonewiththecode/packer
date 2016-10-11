@@ -1,6 +1,14 @@
 installing centos
 answer section "english"
 
-
 Installing Ubuntu
 https://help.ubuntu.com/14.04/installation-guide/example-preseed.txt
+
+Directory Structure
+Example directory structure
+ - Cenots
+  - http
+  - packer_cache (created by packer when you execute packer build command)
+  - script
+  - .gitignore
+  - *.json (packer build configuration file)
