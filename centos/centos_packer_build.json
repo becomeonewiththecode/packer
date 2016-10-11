@@ -12,20 +12,14 @@
 "ssh_username": "vagrant",
 "ssh_password": "vagrant",
 "headless": "false",
-"disk_size": 40000,
-"boot_wait": "10s",
-"output_directory": "/tmp/centos-64-virtualbox",
+"disk_size": 10000,
+"boot_wait": "4s",
+"output_directory": "virtualbox",
 "shutdown_command": "echo 'vagrant' | sudo -S shutdown -P now",
+"http_directory": "http",
 "boot_command": [
-        "<esc><esc><enter><wait>",
-        "/install/vmlinuz noapic ",
-        "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/precise_preseed.cfg ",
-        "debian-installer=en_US auto locale=en_US kbd-chooser/method=us ",
-        "hostname={{user `hostname`}} ",
-        "fb=false debconf/frontend=noninteractive ",
-        "keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA ",
-        "keyboard-configuration/variant=USA console-setup/ask_detect=false ",
-        "initrd=/install/initrd.gz -- <enter>"
+	"<wait><esc><esc>",
+	"linux ks=http://{{.HTTPIP}}:{{.HTTPPort}}/kickstart<enter>"
       ]
 }
 ]
