@@ -1,0 +1,43 @@
+{
+	"variables": {
+			"VM_NAME": "centos7",
+			"USER": "vagrant",
+			"USER_PASS": "vagrant"
+			},
+
+	"builders": [
+		 {
+			"type": "virtualbox-iso",
+			"guest_os_type": "RedHat_64",
+			"iso_url": "/home/oss/Downloads/CentOS-7-x86_64-Minimal-1511.iso",
+			"iso_checksum": "f90e4d28fa377669b2db16cbcb451fcb9a89d2460e3645993e30e137ac37d284",
+			"iso_checksum_type": "sha256",
+			"ssh_username": "vagrant",
+			"ssh_password": "vagrant",
+			"headless": "false",
+			"disk_size": 8192,
+			"boot_wait": "5s",
+			"output_directory": "virtualbox",
+			"shutdown_command": "echo 'vagrant' | sudo -S shutdown -P now",
+			"http_directory": "http",
+
+			"boot_command": [
+				"<wait><esc><esc>",
+				"linux ks=http://{{.HTTPIP}}:{{.HTTPPort}}/ks.cfg<enter>",
+				"hostname={{ user `VM_NAME` }}"
+							]
+		}
+	],
+
+	"provisioners": [
+	],
+
+	"post-processors": [
+		[{
+			"type": "vagrant",
+			"compression_level": 9,
+			"output": "builds/{{ user `VM_NAME` }}.box"
+			}]
+	]
+
+}
